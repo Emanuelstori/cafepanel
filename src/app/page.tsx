@@ -2,29 +2,31 @@
 
 import { Checkbox } from "@nextui-org/react";
 import { signIn } from "next-auth/react";
-import { redirect } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 export default function Home() {
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data: any) => {
+  const [showPw, setShowPw] = useState(false);
+  const onSubmit = async (data: any) => {
+    toast.loading("Autenticando...");
     if (!data.email && data.password) {
       return;
     }
-    signIn("credentials", {
+    const res = await signIn("credentials", {
       email: data?.email,
       password: data?.password,
-      redirect: false,
-    }).then((response) => {
-      if (response?.error) {
-        // show notification for user
-        console.log(response.error);
-        console.log("ERROR");
-      } else {
-        // redirect to destination page
-        redirect("/dashboard");
-      }
+      callbackUrl: "/dashboard",
     });
+    if (res?.error) {
+      toast.error("Erro na autenticação.");
+    }
+    console.log(res);
+    if (res) {
+      toast.success("Autenticado com sucesso!");
+    }
   };
   return (
     <main className="w-screen h-screen bg-[#1d243d] flex items-center justify-center">
@@ -44,12 +46,25 @@ export default function Home() {
               required
               {...register("email")}
             />
-            <input
-              className="bg-[rgba(255,255,255,0.05)] w-full rounded py-2 px-2"
-              placeholder="Password"
-              required
-              {...register("password")}
-            />
+            <div className="relative">
+              <input
+                className="bg-[rgba(255,255,255,0.05)] w-full rounded py-2 px-2 pr-10" // Adicione `pr-10` para espaço à direita para o ícone
+                placeholder="Password"
+                type={showPw ? "text" : "password"}
+                required
+                {...register("password")}
+              />
+              <div
+                className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer z-30"
+                onClick={() => setShowPw(!showPw)}
+              >
+                {showPw ? (
+                  <AiFillEyeInvisible className="text-gray-400" />
+                ) : (
+                  <AiFillEye className="text-gray-400" />
+                )}
+              </div>
+            </div>
             <div className="w-full flex justify-between">
               <Checkbox className="group">
                 <p className="text-sm group-hover:opacity-40 transition-all">
@@ -70,6 +85,11 @@ export default function Home() {
             </button>
           </div>
         </form>
+        <div>
+          <p className="text-xs hover:cursor-pointer">
+            Desenvolvido por <strong>Emanuelstor</strong> ☕
+          </p>
+        </div>
       </div>
     </main>
   );

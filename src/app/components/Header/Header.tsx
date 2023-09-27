@@ -1,4 +1,5 @@
 "use client";
+//header
 import { Button } from "@nextui-org/button";
 import {
   Avatar,
@@ -10,12 +11,11 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@nextui-org/react";
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import { IoNotifications } from "react-icons/io5";
 import { MdFeedback } from "react-icons/md";
 
-export default function MyHeader() {
-  const { data: session } = useSession();
+export default function Header() {
   return (
     <>
       <div className="fixed flex items-center justify-end w-full left-0 top-0 h-16 bg-[#070720]">
@@ -58,7 +58,7 @@ export default function MyHeader() {
             <DropdownMenu aria-label="Profile Actions" variant="flat">
               <DropdownItem key="profile" className="h-14 gap-2">
                 <p className="font-semibold">Signed in as</p>
-                <p className="font-semibold">{session?.user?.user.email}</p>
+                <p className="font-semibold">teste@gmail.com</p>
               </DropdownItem>
               <DropdownItem key="settings">My Settings</DropdownItem>
               <DropdownItem key="team_settings">Team Settings</DropdownItem>
@@ -71,7 +71,7 @@ export default function MyHeader() {
               <DropdownItem
                 key="logout"
                 color="danger"
-                onClick={() => signOut()}
+                onClick={() => signOut({ callbackUrl: "/" })}
               >
                 Log Out
               </DropdownItem>
