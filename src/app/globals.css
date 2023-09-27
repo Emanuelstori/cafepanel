@@ -6,6 +6,41 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --lightprimary: #ffffff;
+  --darkprimary: #1f2122;
+  --darksecondary: #27292a;
+  --lightsecondary: #eeeeee;
+  --darkthird: #1a1a1a;
+  --lightthird: #dbdbdb;
+  --lightselected: #ff0000;
+  --darkselected: #ffdb24;
+  --lightcontent: #cccc;
+  --darkcontent: #1a1a1a;
+}
+
+::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+}
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #383864;
+}
+::-webkit-scrollbar-thumb, ::-webkit-scrollbar-track {
+  border-radius: 7px;
+  border: 4px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb, ::-webkit-scrollbar-track {
+  border-radius: 7px;
+  border: 4px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-track {
+  background-color: #25254b;
+  box-shadow: inset 0 0 99px #25254b;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -16,12 +51,20 @@
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+html {
+  --myprimary: var(--lightprimary);
+  --mysecondary: var(--lightsecondary);
+  --mythird: var(--lightthird);
+  --myselected: var(--lightselected);
+  --mycontent: var(--lightcontent);
+  @apply bg-myprimary text-gray-600 font-semibold
+}
+
+html.dark {
+  --myprimary: var(--darkprimary);
+  --mysecondary: var(--darksecondary);
+  --mythird: var(--darkthird);
+  --myselected: var(--darkselected);
+  --mycontent: var(--darkcontent);
+  @apply bg-myprimary text-white
 }
