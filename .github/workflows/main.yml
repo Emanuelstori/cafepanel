@@ -27,14 +27,14 @@ jobs:
         working-directory: /home/manuftp/cafe/cafepanel/
       - name: Build
         run: |
-          npm i
-          npm run build
+          yarn i
+          yarn run build
         shell: bash
         working-directory: /home/manuftp/cafe/cafepanel/
       - name: Deploy
         run: |
           pm2 stop cafepanel
           pm2 delete cafepanel
-          pm2 start npm --name "cafepanel" -- start
+          pm2 start yarn --interpreter bash --name "cafepanel" -- start
         shell: bash
         working-directory: /home/manuftp/cafe/cafepanel/
