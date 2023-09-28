@@ -13,8 +13,8 @@ jobs:
     steps:
       - name: 🚚 Get latest code
         uses: actions/checkout@v2
-        run : git pull
-        run: |
+        run : |
+          git pull
           touch .env
           echo DATABASE_URL=${{ secrets.db_url}} >> .env
           echo NEXT_PUBLIC_DOMAIN="manuvps.shop" >> .env
@@ -22,8 +22,7 @@ jobs:
           echo NEXTAUTH_SECRET="development" >> .env
           echo NEXTAUTH_URL="http://manuvps.shop/api/auth" >> .env
           echo NODE_ENV=production >> .env
-        run: npm i
-        run: npm run build
-        run: |
+          npm i
+          npm run build
           npm install pm2@latest -g #install pm2 global
           pm2 start npm --name "cafepanel" -- start
