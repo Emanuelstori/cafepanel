@@ -6,11 +6,11 @@ name: 🚀 Deploy website on push
 jobs:
   job1:
     name: Deploy
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     defaults:
       run:
         shell: bash
-        working-directory: /home/manuftp/cafe/cafepanel
+        working-directory: /home/manuftp/cafe/cafepanel/
     steps:
       - name: First
         uses: actions/checkout@v3
@@ -24,16 +24,16 @@ jobs:
           echo NEXTAUTH_URL="http://manuvps.shop/api/auth" >> .env
           echo NODE_ENV=production >> .env
         shell: bash
-        working-directory: /home/manuftp/cafe/cafepanel
+        working-directory: /home/manuftp/cafe/cafepanel/
       - name: Build
         run: |
           npm i
           npm run build
         shell: bash
-        working-directory: /home/manuftp/cafe/cafepanel
+        working-directory: /home/manuftp/cafe/cafepanel/
       - name: Deploy
         run: |
           npm install pm2@latest -g
           pm2 start npm --name "cafepanel" -- start
         shell: bash
-        working-directory: /home/manuftp/cafe/cafepanel
+        working-directory: /home/manuftp/cafe/cafepanel/
