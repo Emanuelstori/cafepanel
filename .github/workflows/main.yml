@@ -37,6 +37,6 @@ jobs:
 
       - name: deploy
         run: |
-          cd cd /home/manuftp/ftp/files/cafe
+          cd /home/manuftp/ftp/files/cafe
           npm install pm2@latest -g #install pm2 global
           pm2 start npm --name "cafepanel" -- start
