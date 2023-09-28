@@ -17,4 +17,23 @@ jobs:
           server: ${{ secrets.ftp_host }}
           username: ${{ secrets.ftp_user }}
           password: ${{ secrets.ftp_password }}
-          server-dir: files/cafe/
+          server-dir: files/cafe/panel/
+
+      - name: Create env file
+        run: |
+          touch .env
+          echo DATABASE_URL=${{ secrets.db_url}} >> .env
+          echo NEXT_PUBLIC_DOMAIN="manuvps.shop" >> .env
+          echo SECRET_KEY=${{ secrets.secret_key}} >> .env
+          echo NEXTAUTH_SECRET="development" >> .env
+          echo NEXTAUTH_URL="http://manuvps.shop/api/auth" >> .env
+          echo NODE_ENV=production >> .env
+
+      - name: install
+        run: npm i
+
+      - name: build
+        run: npm run build
+
+      - name: deploy
+        run: pm2 restart cafepanel
