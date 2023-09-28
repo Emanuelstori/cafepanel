@@ -16,7 +16,7 @@ const handler = NextAuth({
         password: {}
       },
       async authorize(credentials, req) {
-        const response = await fetch('http://localhost:3000/api/login', {
+        const response = await fetch(`http://${process.env.NEXT_PUBLIC_DOMAIN}/api/login`, {
           body: JSON.stringify({
             "email": credentials?.email,
             "password": credentials?.password
