@@ -34,6 +34,7 @@ jobs:
       - name: Deploy
         run: |
           pm2 stop cafepanel
-          pm2 start cafepanel
+          pm2 delete cafepanel
+          pm2 start npm --name "cafepanel" -- start
         shell: bash
         working-directory: /home/manuftp/cafe/cafepanel/
