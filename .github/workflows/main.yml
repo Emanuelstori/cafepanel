@@ -4,25 +4,25 @@ on:
       - main
 name: 🚀 Deploy website on push
 jobs:
-  web-deploy:
-    name: 🎉 Deploy
+  job1:
+    name: Deploy
     runs-on: ubuntu-latest
     defaults:
-      	run:
-          shell: bash
-          working-directory: ~/manuftp/cafe/cafepanel
+      run:
+        shell: bash
+        working-directory: /home/manuftp/cafe/cafepanel
     steps:
-        uses: actions/checkout@v2
-        run : |
-          git pull
-          touch .env
-          echo DATABASE_URL=${{ secrets.db_url}} >> .env
-          echo NEXT_PUBLIC_DOMAIN="manuvps.shop" >> .env
-          echo SECRET_KEY=${{ secrets.secret_key}} >> .env
-          echo NEXTAUTH_SECRET="development" >> .env
-          echo NEXTAUTH_URL="http://manuvps.shop/api/auth" >> .env
-          echo NODE_ENV=production >> .env
-          npm i
-          npm run build
-          npm install pm2@latest -g #install pm2 global
-          pm2 start npm --name "cafepanel" -- start
+      uses: actions/checkout@v2
+      run: |
+        git pull
+        touch .env
+        echo DATABASE_URL=${{ secrets.db_url}} >> .env
+        echo NEXT_PUBLIC_DOMAIN="manuvps.shop" >> .env
+        echo SECRET_KEY=${{ secrets.secret_key}} >> .env
+        echo NEXTAUTH_SECRET="development" >> .env
+        echo NEXTAUTH_URL="http://manuvps.shop/api/auth" >> .env
+        echo NODE_ENV=production >> .env
+        npm i
+        npm run build
+        npm install pm2@latest -g #install pm2 global
+        pm2 start npm --name "cafepanel" -- start
