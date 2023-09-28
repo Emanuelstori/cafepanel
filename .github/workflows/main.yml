@@ -9,13 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: /home/cafe/panel/
+        working-directory: ~/manuftp/cafe/cafepanel
     steps:
       - name: 🚚 Get latest code
         uses: actions/checkout@v2
       
       - name: Get github files
-        uses: actions/checkout@v2
         run : |
           git pull
 
