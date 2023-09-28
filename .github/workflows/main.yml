@@ -1,24 +1,14 @@
+#test
+name: Node.js CI
 on:
   push:
-    branches:
-      - main
-name: 🚀 Deploy website on push
+    branches: main
+  pull_request:
+    branches: main
 jobs:
-  web-deploy:
-    name: 🎉 Deploy
-    runs-on: ubuntu-latest
+  build:
+    runs-on: self-hosted
     steps:
-      - name: 🚚 Get latest code
-        uses: actions/checkout@v2
-
-      - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@4.0.0
-        with:
-          server: ${{ secrets.ftp_host }}
-          username: ${{ secrets.ftp_user }}
-          password: ${{ secrets.ftp_password }}
-          server-dir: files/cafe/panel/
-
       - name: Create env file
         run: |
           touch .env
@@ -28,16 +18,8 @@ jobs:
           echo NEXTAUTH_SECRET="development" >> .env
           echo NEXTAUTH_URL="http://manuvps.shop/api/auth" >> .env
           echo NODE_ENV=production >> .env
-
-      - name: install
-        run: npm i
-
-      - name: build
-        run: npm run build
-
-      - name: deploy
-        run: |
-          pwd
-          cd /home/${{secrets.ftp_user}}/ftp/files/cafe
-          npm install pm2@latest -g #install pm2 global
-          pm2 start npm --name "cafepanel" -- start
+      - run: cd ~
+      - run: git pull https://github.com/Emanuelstori/cafepanel.git main
+      - run: npm i
+      - run: npm install pm2@latest -g
+      - run: pm2 start npm --name "cafepanel" -- start
