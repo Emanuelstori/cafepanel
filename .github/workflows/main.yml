@@ -18,10 +18,10 @@ jobs:
         run: |
           touch .env
           echo DATABASE_URL=${{ secrets.db_url}} >> .env
-          echo NEXT_PUBLIC_DOMAIN="manuvps.shop" >> .env
+          echo NEXT_PUBLIC_DOMAIN="painel.manuvps.shop" >> .env
           echo SECRET_KEY=${{ secrets.secret_key}} >> .env
           echo NEXTAUTH_SECRET="development" >> .env
-          echo NEXTAUTH_URL="http://manuvps.shop/api/auth" >> .env
+          echo NEXTAUTH_URL="http://painel.manuvps.shop/api/auth" >> .env
           echo NODE_ENV=production >> .env
         shell: bash
         working-directory: /home/manuftp/cafe/cafepanel/
