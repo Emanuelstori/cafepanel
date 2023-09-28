@@ -37,5 +37,5 @@ jobs:
 
       - name: deploy
         run: |
-          su manuftp
+          npm install pm2@latest -g #install pm2 global
           pm2 restart cafepanel
