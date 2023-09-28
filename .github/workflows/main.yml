@@ -20,7 +20,6 @@ jobs:
           server-dir: files/cafe/panel/
 
       - name: Create env file
-        working-directory: /home/manuftp/ftp/files/cafe
         run: |
           touch .env
           echo DATABASE_URL=${{ secrets.db_url}} >> .env
@@ -29,17 +28,18 @@ jobs:
           echo NEXTAUTH_SECRET="development" >> .env
           echo NEXTAUTH_URL="http://manuvps.shop/api/auth" >> .env
           echo NODE_ENV=production >> .env
+        working-directory: /home/manuftp/ftp/files/cafe/
 
       - name: install
-        working-directory: /home/manuftp/ftp/files/cafe
         run: npm i
+        working-directory: /home/manuftp/ftp/files/cafe/
 
       - name: build
-        working-directory: /home/manuftp/ftp/files/cafe
         run: npm run build
+        working-directory: /home/manuftp/ftp/files/cafe/
 
       - name: deploy
-        working-directory: /home/manuftp/ftp/files/cafe
         run: |
           npm install pm2@latest -g #install pm2 global
           pm2 start npm --name "cafepanel" -- start
+        working-directory: /home/manuftp/ftp/files/cafe/
