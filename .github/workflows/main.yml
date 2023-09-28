@@ -33,7 +33,7 @@ jobs:
         working-directory: /home/manuftp/cafe/cafepanel/
       - name: Deploy
         run: |
-          npm install pm2@latest -g
-          pm2 start npm --name "cafepanel" -- start
+          pm2 stop cafepanel
+          pm2 start cafepanel
         shell: bash
         working-directory: /home/manuftp/cafe/cafepanel/
