@@ -27,7 +27,7 @@ jobs:
         working-directory: /home/manuftp/cafe/cafepanel/
       - name: Build
         run: |
-          yarn i
+          yarn
           yarn run build
         shell: bash
         working-directory: /home/manuftp/cafe/cafepanel/
