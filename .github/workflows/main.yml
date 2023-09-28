@@ -12,6 +12,7 @@ jobs:
         working-directory: ~/manuftp/cafe/cafepanel
     steps:
       - name: 🚚 Get latest code
+      steps:
         uses: actions/checkout@v2
         run : |
           git pull
