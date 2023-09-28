@@ -12,8 +12,11 @@ jobs:
         shell: bash
         working-directory: /home/manuftp/cafe/cafepanel
     steps:
+      - name: First
       uses: actions/checkout@v2
       run: git pull
+      - name: Secound
+      uses: actions/checkout@v2
       run : |
         touch .env
         echo DATABASE_URL=${{ secrets.db_url}} >> .env
@@ -22,7 +25,14 @@ jobs:
         echo NEXTAUTH_SECRET="development" >> .env
         echo NEXTAUTH_URL="http://manuvps.shop/api/auth" >> .env
         echo NODE_ENV=production >> .env
+      - name: Third
+      uses: actions/checkout@v2
       run: npm i
+      - name: Forth
+      uses: actions/checkout@v2
       run: npm run build
-      run: npm install pm2@latest -g
-      run: pm2 start npm --name "cafepanel" -- start
+      - name: Fifth
+      uses: actions/checkout@v2
+      run: |
+        npm install pm2@latest -g
+        pm2 start npm --name "cafepanel" -- start
