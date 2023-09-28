@@ -15,8 +15,7 @@ jobs:
       - name: First
         uses: actions/checkout@v3
       - name: Configure Project
-        run: git pull
-        run : |
+        run: |
           touch .env
           echo DATABASE_URL=${{ secrets.db_url}} >> .env
           echo NEXT_PUBLIC_DOMAIN="manuvps.shop" >> .env
