@@ -7,7 +7,9 @@ jobs:
   web-deploy:
     name: 🎉 Deploy
     runs-on: ubuntu-latest
-    run: working-directory: ~/manuftp/cafe/cafepanel
+    defaults:
+      shell: bash
+      run: working-directory: ~/manuftp/cafe/cafepanel
     steps:
         uses: actions/checkout@v2
         run : |
