@@ -37,5 +37,5 @@ jobs:
 
       - name: deploy
         run: |
-          npm i pm2
+          su manuftp
           pm2 restart cafepanel
