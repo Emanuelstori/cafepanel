@@ -27,15 +27,13 @@ jobs:
         working-directory: /home/manuftp/cafe/cafepanel/
       - name: Build
         run: |
+          pm2 stop cafepanel
           rm -rf package-lock.json
-          rm -rf build
-          yarn
-          yarn run build
+          npm i
         shell: bash
         working-directory: /home/manuftp/cafe/cafepanel/
       - name: Deploy
         run: |
-          pm2 stop cafepanel
           pm2 start cafepanel
         shell: bash
         working-directory: /home/manuftp/cafe/cafepanel/
