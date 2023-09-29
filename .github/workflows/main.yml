@@ -28,6 +28,7 @@ jobs:
       - name: Build
         run: |
           rm -rf package-lock.json
+          rm -rf build
           yarn
           yarn run build
         shell: bash
